@@ -10,12 +10,14 @@
   </div>
 
   <ContainerBox :Posting="Posting"/>
+  <button @click="more">더보기</button>
 
 </template>
 
 <script>
 import ContainerBox from "./components/ContainerBox.vue";
 import PostingData from "./assets/PostingData.js";
+import axios from 'axios';
 
 export default {
   name: 'App',
@@ -25,7 +27,17 @@ export default {
   data() {
     return {
       Posting : PostingData,
+      morecount : 0,
     }
+  },
+  methods: {
+    more(){
+      axios.get(`https://codingapple1.github.io/vue/more${this.morecount}.json`)
+      .then((get요청결과) => {
+        this.Posting.push(get요청결과.data);
+        this.morecount++;
+      })
+    },
   },
 }
 </script>
