@@ -4,12 +4,13 @@
     <li>Cancel</li>
   </ul>
   <ul class="header-button-right">
-    <li>Next</li>
+    <li v-if="step==1" @click="step = (step+1)%3">Next</li>
+    <li v-if="step==2" @click="publish()">발행</li>
   </ul>
   <img src="./assets/logo.png" class="logo" />
 </div>
 
-  <ContainerBox :url="url" :Posting="Posting" :step="step" @stepPlus="step = (step+1)%3"/>
+  <ContainerBox :url="url" :Posting="Posting" :step="step" @uploadMessage="content=$event"/>
   <button @click="more">더보기</button>
 
   <div class="footer">
@@ -37,6 +38,7 @@ export default {
       morecount : 0,
       step : 0,
       url : null,
+      content : "이거 나오면 진짜 화난다.",
     }
   },
   methods: {
@@ -53,6 +55,20 @@ export default {
       this.url = url;
       console.log(url);
       this.step = 1;
+    },
+    publish(){
+      var 내게시물 = {
+        name: "Kim Hyun",
+        userImage: "https://picsum.photos/100?random=3",
+        postImage: this.url,
+        likes: 36,
+        date: "May 15",
+        liked: false,
+        content: this.content,
+        filter: "perpetua"
+      };
+      this.Posting.unshift(내게시물);
+      this.step = 0;
     }
   },
 }

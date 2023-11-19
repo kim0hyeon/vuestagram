@@ -16,11 +16,10 @@
     <span v-if="step == 2">
       <div class="upload-image" :style="{ backgroundImage : `url(${url})`}"></div>
       <div class="write">
-        <textarea class="write-box">write!</textarea>
+        <textarea class="write-box" v-model="message" @change="$emit('uploadMessage', message)"></textarea>
       </div>
     </span>
   </div>
-  <button @click="$emit('stepPlus', step)">step변경버튼</button>
 </template>
 
 <script>
@@ -35,6 +34,11 @@ export default {
       Posting : Array,
       step : Number,
       url : String,
+    },
+    data(){
+      return{
+        message : 'Write here!',
+      }
     },
 }
 </script>
