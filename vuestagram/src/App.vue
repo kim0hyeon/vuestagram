@@ -1,16 +1,23 @@
 <template>
 <div class="header">
-    <ul class="header-button-left">
-      <li>Cancel</li>
-    </ul>
-    <ul class="header-button-right">
-      <li>Next</li>
-    </ul>
-    <img src="./assets/logo.png" class="logo" />
-  </div>
+  <ul class="header-button-left">
+    <li>Cancel</li>
+  </ul>
+  <ul class="header-button-right">
+    <li>Next</li>
+  </ul>
+  <img src="./assets/logo.png" class="logo" />
+</div>
 
-  <ContainerBox :Posting="Posting"/>
+  <ContainerBox :url="url" :Posting="Posting" :step="step" @stepPlus="step = (step+1)%3"/>
   <button @click="more">더보기</button>
+
+  <div class="footer">
+    <ul class="footer-button-plus">
+      <input @change="upload" type="file" id="file" class="inputfile" />
+      <label for="file" class="input-plus">+</label>
+    </ul>
+  </div>
 
 </template>
 
@@ -28,6 +35,8 @@ export default {
     return {
       Posting : PostingData,
       morecount : 0,
+      step : 0,
+      url : null,
     }
   },
   methods: {
@@ -38,6 +47,13 @@ export default {
         this.morecount++;
       })
     },
+    upload(e){
+      let 파일 = e.target.files;
+      let url = URL.createObjectURL(파일[0]);
+      this.url = url;
+      console.log(url);
+      this.step = 1;
+    }
   },
 }
 </script>

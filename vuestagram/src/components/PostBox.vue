@@ -28,7 +28,6 @@ export default {
     width: 100%;
 }
 .profile {
-    background-image: url();
     width: 30px;
     height: 30px;
     background-size: 100%;
@@ -47,7 +46,6 @@ export default {
     padding: 10px;
 }
 .post-body {
-    background-image: url();
     height: 450px;
     background-position: center;
     background-size: cover;
