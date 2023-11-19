@@ -5,11 +5,9 @@
     <span v-if="step == 1">
       <div class="upload-image" :style="{ backgroundImage : `url(${url})`}"></div>
       <div class="filters">
-        <div class="filter-1"></div>
-        <div class="filter-1"></div>
-        <div class="filter-1"></div>
-        <div class="filter-1"></div>
-        <div class="filter-1"></div>
+        <FilterBox :URL="url" :filter="filter" v-for="(filter, index) in filters" :key="index">
+          {{filter}}
+        </FilterBox>
       </div>
     </span>
 
@@ -24,11 +22,13 @@
 
 <script>
 import PostBox from './PostBox.vue';
+import FilterBox from './FilterBox.vue';
 
 export default {
     name : "ContainerBox",
     components : {
       PostBox,
+      FilterBox,
     },
     props: {
       Posting : Array,
@@ -38,6 +38,9 @@ export default {
     data(){
       return{
         message : 'Write here!',
+        filters : [ "aden", "_1977", "brannan", "brooklyn", "clarendon", "earlybird", "gingham", "hudson", 
+        "inkwell", "kelvin", "lark", "lofi", "maven", "mayfair", "moon", "nashville", "perpetua", 
+        "reyes", "rise", "slumber", "stinson", "toaster", "valencia", "walden", "willow", "xpro2"],
       }
     },
 }
